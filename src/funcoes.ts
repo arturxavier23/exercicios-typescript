@@ -1,4 +1,4 @@
-// Exercício 1: CalcularIMC
+// Exercício 1: Calcular IMC
 function calcularIMC(peso: number, altura: number): number {
     return peso / (altura * altura);
 }
@@ -21,6 +21,7 @@ interface Produto {
     id: number;
     nome: string;
     preco: number;
+    descricao?: string;
 }
 
 function formatarProduto(produto: Produto): string {
@@ -37,10 +38,8 @@ type UnidadeTemperatura = "celsius" | "fahrenheit";
 
 function converterTemperatura(valor: number, unidade: UnidadeTemperatura): number {
     if (unidade === "celsius") {
-        // Celsius p/ Fahrenheit
         return (valor * 9 / 5) + 32;
     } else {
-        // Fahrenheit p/ Celsius
         return (valor - 32) * 5 / 9;
     }
 }
@@ -63,7 +62,6 @@ function calcularMedia(aluno: Aluno): number {
 }
 
 // Exercício 9: Tipo de Resposta de API (Genérico)
-
 type ApiResponse<T> = {
     sucesso: boolean;
     dados: T | null;
@@ -80,29 +78,9 @@ function buscarUsuarios(): ApiResponse<Usuario[]> {
     return {
         sucesso: true,
         dados: [
-            { id: 1, nome: "Zé Nedin Zidane-se", email: "zenedin@email.com" },
-            { id: 2, nome: "Kilimanja Arrola", email: "kilimanja@email.com" }
+            { id: 1, nome: "João", email: "joao@email.com" },
+            { id: 2, nome: "Maria", email: "maria@email.com" }
         ],
         erro: null
     };
-}
-
-// Exercício 10: Componente Tipado de Lista de Tarefas
-interface Tarefa {
-    id: number;
-    titulo: string;
-    concluida: boolean;
-}
-
-interface ListaTarefasProps {
-    tarefas: Tarefa[];
-    onToggle: (id: number) => void;
-}
-
-export function ListaTarefas({ tarefas, onToggle }: ListaTarefasProps) {
-    type Filtro = "todas" | "pendentes" | "concluidas";
-    
-    let filtroAtual: Filtro = "todas";
-
-    console.log(`Log: Exibindo ${tarefas.length} tarefas.`);
 }
